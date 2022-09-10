@@ -3,7 +3,7 @@
 <%@ page import="hello.servlet.domain.member.MemberRepository" %>
 <!-- 로직을 넣는 부분 -->
 <%
-    //request, response는 자동으로 사용 가능
+    //request, response 는 자동으로 사용 가능 - JSP 도 servlet 으로 변환되서 전송되기 때문에
     MemberRepository memberRepository = MemberRepository.getInstance();
 
     System.out.println("MemberSaveServlet.service");
