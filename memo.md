@@ -103,5 +103,36 @@ FrontControllerServletV5 과정의 순서
 4. 컨트롤러에서 모델뷰를 받아와서 FrontController 에 전달
 5. FrontController 에서 받은 모델뷰를 이용하여 viewResolver 를 통해 응답
 
+직접 만든 프레임워크 -> Spring MVC 비교
+FrontController -> DispatcherServlet : *** MVC 패턴에서 제일 중요한 부분
+handlerMappingMap -> HandlerMapping
+MyHandlerAdapter -> HandlerAdapter
+ModelView -> ModelAndView
+viewResolver -> ViewResolver
+MyView -> View
+
+DispatcherServlet 도 HttpServlet을 상속받은 것
+DispatcherServlet 내에서 가장 중요한 메소드는 'doDispatch()' 
+        -> doDispatch() 메소드에서도 핸들러를 가져오기 위해 어댑터를 이용하여 모델뷰를 반환받아 최종적으로 사용하게 됨
+
+--------- SPRING MVC START ---------
+@RequestMapping
+- RequestMappingHandlerMapping : handler 를 찾아주는 기능
+- RequestMappingHandlerAdapter : adapter 를 찾아주는 기능
+위의 2개가 가장 우선순위가 높은 핸들러 매핑과 핸들러 어댑터이다.
+
+@Controller
+- 내부에 @Component 애노테이션이 존재해 컴포넌트 스캔의 대상이 되기 때문에 스프링 빈으로 자동으로 등록 됨
+
+RequestMappingHandlerMapping 은 스프링 빈 중에서 @RequestMapping 또는 @Controller 가 클래스 레벨에 붙어있는 경우에
+매핑정보로 인식함
+
+@RequestMapping 은 클래스를 통합하는 것을 넘어서 조합도 가능함
+클래스 수준에 중복되는 url 을 명시하고 메소드 수준에 논리적인 명칭을 추가하면 됨
+
+@RequestParam 은 request.getParameter() 과 거의 동일한 코드라고 생각하면 됨
+GET, POST 두가지 방식을 모두 지원
+
+@RequestMapping -> @GetMapping, @PostMapping 으로 변경하여 사용할 수 있음
 
 
